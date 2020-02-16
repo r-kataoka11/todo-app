@@ -45,16 +45,7 @@
 </template>
 
 <script>
-import { Auth } from 'aws-amplify'
-
 export default {
-  middleware: 'auth',
-  async asyncData() {
-    // ログイン中のユーザー名を取得する
-    const user = await Auth.currentAuthenticatedUser()
-    return {
-      UserName: user.attributes.email
-    }
-  }
+  middleware: 'auth'
 }
 </script>

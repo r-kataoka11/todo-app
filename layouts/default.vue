@@ -32,6 +32,7 @@
       <v-toolbar-side-icon @click="drawer = !drawer" />
       <v-toolbar-title v-text="title" />
       <v-spacer />
+      <HeaderUser />
     </v-toolbar>
     <v-content>
       <v-container>
@@ -49,7 +50,9 @@
 
 <script>
 import { AmplifyEventBus } from 'aws-amplify-vue'
+import HeaderUser from '~/components/HeaderUser'
 export default {
+  components: { HeaderUser },
   data() {
     return {
       clipped: false,
