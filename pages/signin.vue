@@ -1,0 +1,3 @@
+<template>
+  <amplify-authenticator />
+</template>

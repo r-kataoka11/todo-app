@@ -1,0 +1,20 @@
+{
+    "devtodo": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-nuxt-todo-app-devtodo-75051-authRole",
+            "UnauthRoleArn": "arn:aws:iam::822384381366:role/amplify-nuxt-todo-app-devtodo-75051-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::822384381366:role/amplify-nuxt-todo-app-devtodo-75051-authRole",
+            "Region": "ap-northeast-1",
+            "DeploymentBucketName": "amplify-nuxt-todo-app-devtodo-75051-deployment",
+            "UnauthRoleName": "amplify-nuxt-todo-app-devtodo-75051-unauthRole",
+            "StackName": "amplify-nuxt-todo-app-devtodo-75051",
+            "StackId": "arn:aws:cloudformation:ap-northeast-1:822384381366:stack/amplify-nuxt-todo-app-devtodo-75051/ffa11360-4d20-11ea-99c4-0ac3b391d020",
+            "AmplifyAppId": "d2sof66c68enmm"
+        },
+        "categories": {
+            "auth": {
+                "nuxttodoappda2190bb": {}
+            }
+        }
+    }
+}
