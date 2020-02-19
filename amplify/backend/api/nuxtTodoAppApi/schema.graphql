@@ -1,0 +1,8 @@
+type Todo @model {
+  taskid: ID!
+  title: String!
+  content: String
+  is_completed: Boolean
+  created_at: String
+  updated_at: String
+}

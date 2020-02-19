@@ -6,5 +6,24 @@
 			"dependsOn": [],
 			"customAuth": false
 		}
+	},
+	"storage": {},
+	"function": {},
+	"api": {
+		"nuxtTodoAppApi": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"authConfig": {
+					"additionalAuthenticationProviders": [],
+					"defaultAuthentication": {
+						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
+						"userPoolConfig": {
+							"userPoolId": "authnuxttodoappda2190bb"
+						}
+					}
+				}
+			}
+		}
 	}
 }
