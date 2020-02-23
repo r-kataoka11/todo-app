@@ -1,8 +1,8 @@
 <template>
   <v-list-item>
     <v-list-item-action>
-      <v-btn icon>
-        <v-icon>radio_button_unchecked</v-icon>
+      <v-btn @click="taskCompleted" icon>
+        <v-icon>{{ computedStatus }}</v-icon>
       </v-btn>
     </v-list-item-action>
     <v-dialog v-model="dialog" persistent max-width="600px">
@@ -37,7 +37,27 @@ export default {
   data: () => ({
     dialog: false
   }),
+  computed: {
+    /**
+     * タスクの完了状態によってアイコンを変更
+     */
+    computedStatus() {
+      return this.task.is_completed ? 'radio_button_checked' : 'radio_button_unchecked'
+    }
+  },
   methods: {
+    /**
+     * タスクの完了・未完了更新
+     */
+    taskCompleted() {
+      const nowDate = new Date()
+      const data = {
+        ...this.task,
+        is_completed: !this.task.is_completed,
+        updated_at: Math.floor(nowDate.getTime() / 1000)
+      }
+      API.graphql(graphqlOperation(updateTodo, { input: data }))
+    },
     /*
      * ダイアログを閉じる
      */
