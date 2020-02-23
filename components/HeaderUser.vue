@@ -11,14 +11,11 @@
           color="primary"
           dark
           text
-          flat
         >
           <v-avatar>
             <v-icon>account_circle</v-icon>
           </v-avatar>
-          <v-btn-content>
-            {{ UserName }}
-          </v-btn-content>
+          {{ UserName }}
         </v-btn>
       </template>
       <v-list>

@@ -1,25 +1,25 @@
 <template>
-  <v-list-tile>
-    <v-list-tile-action>
+  <v-list-item>
+    <v-list-item-action>
       <v-btn icon>
         <v-icon>radio_button_unchecked</v-icon>
       </v-btn>
-    </v-list-tile-action>
+    </v-list-item-action>
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on }">
-        <v-list-tile-content v-on="on">
-          <v-list-tile-title>{{ task.title }}</v-list-tile-title>
-          <v-list-tile-subtitle>{{ task.content }}</v-list-tile-subtitle>
-        </v-list-tile-content>
+        <v-list-item-content v-on="on">
+          <v-list-item-title>{{ task.title }}</v-list-item-title>
+          <v-list-item-subtitle>{{ task.content }}</v-list-item-subtitle>
+        </v-list-item-content>
       </template>
       <TaskEditor @updated="closeDialog" />
     </v-dialog>
-    <v-list-tile-action>
+    <v-list-item-action>
       <v-btn @click="deleteTask" icon>
         <v-icon>delete</v-icon>
       </v-btn>
-    </v-list-tile-action>
-  </v-list-tile>
+    </v-list-item-action>
+  </v-list-item>
 </template>
 
 <script>
