@@ -12,7 +12,7 @@
           <v-list-item-subtitle>{{ task.content }}</v-list-item-subtitle>
         </v-list-item-content>
       </template>
-      <TaskEditor @updated="closeDialog" />
+      <TaskEditor :task="task" @save="updateTask" @close="closeDialog" />
     </v-dialog>
     <v-list-item-action>
       <v-btn @click="deleteTask" icon>
@@ -24,7 +24,7 @@
 
 <script>
 import { API, graphqlOperation } from 'aws-amplify'
-import { deleteTodo } from '@/src/graphql/mutations'
+import { updateTodo, deleteTodo } from '@/src/graphql/mutations'
 import TaskEditor from '~/components/TaskEditor'
 export default {
   components: { TaskEditor },
@@ -43,6 +43,13 @@ export default {
      */
     closeDialog() {
       this.dialog = false
+    },
+    /**
+     * タスク内容を更新する
+     */
+    updateTask(data) {
+      API.graphql(graphqlOperation(updateTodo, { input: data }))
+      this.closeDialog()
     },
     /*
      * クリックしたタスクを削除する

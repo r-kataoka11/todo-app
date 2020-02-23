@@ -21,7 +21,7 @@
             </v-icon>
           </v-btn>
         </template>
-        <TaskEditor @updated="closeAddDialog" />
+        <TaskEditor @save="createTask" @close="closeCreateDialog" />
       </v-dialog>
     </v-col>
   </v-row>
@@ -48,19 +48,17 @@ export default {
     }
   },
   methods: {
-    addTask() {
-      const nowDate = new Date()
-      API.graphql(graphqlOperation(createTodo, {
-        input: {
-          title: 'テスト',
-          content: 'テストです',
-          is_completed: false,
-          created_at: Math.floor(nowDate.getTime() / 1000),
-          updated_at: Math.floor(nowDate.getTime() / 1000)
-        }
-      }))
+    /**
+     * タスクを新規登録する
+     */
+    createTask(data) {
+      API.graphql(graphqlOperation(createTodo, { input: data }))
+      this.addDialog = false
     },
-    closeAddDialog() {
+    /**
+     * タスク新規登録ダイアログを閉じる
+     */
+    closeCreateDialog() {
       this.addDialog = false
     }
   }
