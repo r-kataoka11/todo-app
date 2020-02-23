@@ -1,6 +1,6 @@
-# nuxt-todo-app
+# Todoアプリ
 
-> My supreme Nuxt.js project
+Nuxt.js + Amplify + Vuetifyを使用したタスク管理アプリ
 
 ## Build Setup
 
