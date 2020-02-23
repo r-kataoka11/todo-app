@@ -42,6 +42,14 @@ export default {
   },
   computed: {
     taskList() {
+      // 検索キーワードがある場合、タイトルと本文にキーワードが含まれているタスクだけを絞り込んで表示する
+      if (this.$store.state.search.searchText !== '') {
+        const items = this.$store.state.tasks.items
+        return items.filter((element) => {
+          return ~element.title.indexOf(this.$store.state.search.searchText) || ~element.content.indexOf(this.$store.state.search.searchText)
+        })
+      }
+
       return this.$store.state.tasks.items
     }
   },

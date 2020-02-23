@@ -7,6 +7,7 @@
     >
       <v-toolbar-title v-text="title" />
       <v-spacer />
+      <SearchForm />
       <HeaderUser />
     </v-app-bar>
     <v-content>
@@ -25,9 +26,10 @@
 
 <script>
 import { AmplifyEventBus } from 'aws-amplify-vue'
+import SearchForm from '~/components/SearchForm'
 import HeaderUser from '~/components/HeaderUser'
 export default {
-  components: { HeaderUser },
+  components: { SearchForm, HeaderUser },
   data() {
     return {
       clipped: false,
