@@ -1,4 +1,5 @@
 import { API, graphqlOperation } from 'aws-amplify'
+import { onCreateTodo, onUpdateTodo, onDeleteTodo } from '@/src/graphql/subscriptions'
 import { listTodos } from '@/src/graphql/queries'
 
 export const state = () => ({
@@ -49,24 +50,26 @@ export const actions = {
     commit('setItems', taskData.data.listTodos.items)
   },
   /**
-   * タスクを追加する
-   * @param {Object} task タスク（1件）
+   * タスクの状態を監視する
    */
-  addTask({ commit }, task) {
-    commit('add', task)
-  },
-  /**
-   * タスクを削除する
-   * @param {String} id 削除するID（DynamoDB）
-   */
-  removeTask({ commit }, id) {
-    commit('remove', id)
-  },
-  /**
-   * タスクの内容を更新する
-   * @param {Object} task マージするタスク（1件）
-   */
-  updateTask({ commit }, task) {
-    commit('update', task)
+  getTaskChange({ commit }) {
+    // タスクの追加を監視する
+    API.graphql(graphqlOperation(onCreateTodo)).subscribe({
+      next: (eventData) => {
+        commit('add', eventData.value.data.onCreateTodo)
+      }
+    })
+    // タスクの更新を監視する
+    API.graphql(graphqlOperation(onUpdateTodo)).subscribe({
+      next: (eventData) => {
+        commit('update', eventData.value.data.onUpdateTodo)
+      }
+    })
+    // タスクの削除を監視する
+    API.graphql(graphqlOperation(onDeleteTodo)).subscribe({
+      next: (eventData) => {
+        commit('remove', eventData.value.data.onDeleteTodo.id)
+      }
+    })
   }
 }

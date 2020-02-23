@@ -30,7 +30,6 @@
 <script>
 import { API, graphqlOperation } from 'aws-amplify'
 import { createTodo } from '@/src/graphql/mutations'
-import { onCreateTodo, onUpdateTodo, onDeleteTodo } from '@/src/graphql/subscriptions'
 import TaskItem from '~/components/TaskItem'
 import TaskEditor from '~/components/TaskEditor'
 export default {
@@ -48,29 +47,9 @@ export default {
   },
   created() {
     this.$store.dispatch('tasks/getTaskItem')
-    this.subscribe()
+    this.$store.dispatch('tasks/getTaskChange')
   },
   methods: {
-    /**
-     * 非同期で更新情報を取得
-     */
-    subscribe() {
-      API.graphql(graphqlOperation(onCreateTodo)).subscribe({
-        next: (eventData) => {
-          this.$store.dispatch('tasks/addTask', eventData.value.data.onCreateTodo)
-        }
-      })
-      API.graphql(graphqlOperation(onUpdateTodo)).subscribe({
-        next: (eventData) => {
-          this.$store.dispatch('tasks/updateTask', eventData.value.data.onUpdateTodo)
-        }
-      })
-      API.graphql(graphqlOperation(onDeleteTodo)).subscribe({
-        next: (eventData) => {
-          this.$store.dispatch('tasks/removeTask', eventData.value.data.onDeleteTodo.id)
-        }
-      })
-    },
     /**
      * タスクを新規登録する
      */
