@@ -31,6 +31,7 @@
 import { API, graphqlOperation } from 'aws-amplify'
 import { listTodos } from '@/src/graphql/queries'
 import { createTodo } from '@/src/graphql/mutations'
+import { onCreateTodo, onUpdateTodo, onDeleteTodo } from '@/src/graphql/subscriptions'
 import TaskItem from '~/components/TaskItem'
 import TaskEditor from '~/components/TaskEditor'
 export default {
@@ -47,13 +48,42 @@ export default {
       tasks: taskData.data.listTodos.items
     }
   },
+  created() {
+    this.subscribe()
+  },
   methods: {
+    /**
+     * 非同期で更新情報を取得
+     */
+    subscribe() {
+      API.graphql(graphqlOperation(onCreateTodo)).subscribe({
+        next: (eventData) => {
+          this.tasks.push(eventData.value.data.onCreateTodo)
+        }
+      })
+      API.graphql(graphqlOperation(onUpdateTodo)).subscribe({
+        next: (eventData) => {
+          const updatedTask = eventData.value.data.onUpdateTodo
+          this.tasks.some((value, idx) => {
+            if (value.id === updatedTask.id) Object.assign(this.tasks[idx], updatedTask)
+          })
+        }
+      })
+      API.graphql(graphqlOperation(onDeleteTodo)).subscribe({
+        next: (eventData) => {
+          const deletedTask = eventData.value.data.onDeleteTodo
+          this.tasks.some((value, idx) => {
+            if (value.id === deletedTask.id) this.tasks.splice(idx, 1)
+          })
+        }
+      })
+    },
     /**
      * タスクを新規登録する
      */
     createTask(data) {
       API.graphql(graphqlOperation(createTodo, { input: data }))
-      this.addDialog = false
+      this.closeCreateDialog()
     },
     /**
      * タスク新規登録ダイアログを閉じる
