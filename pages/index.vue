@@ -2,7 +2,7 @@
   <v-row justify="center" no-gutters>
     <v-col cols="12" sm="8" md="8">
       <v-list>
-        <TaskItem v-for="task in tasks" :key="task.taskid" :task="task" />
+        <TaskItem v-for="task in taskList" :key="task.taskid" :task="task" />
       </v-list>
       <v-dialog v-model="addDialog" persistent max-width="600px">
         <template v-slot:activator="{ on }">
@@ -29,7 +29,6 @@
 
 <script>
 import { API, graphqlOperation } from 'aws-amplify'
-import { listTodos } from '@/src/graphql/queries'
 import { createTodo } from '@/src/graphql/mutations'
 import { onCreateTodo, onUpdateTodo, onDeleteTodo } from '@/src/graphql/subscriptions'
 import TaskItem from '~/components/TaskItem'
@@ -42,13 +41,13 @@ export default {
       addDialog: false
     }
   },
-  async asyncData() {
-    const taskData = await API.graphql(graphqlOperation(listTodos))
-    return {
-      tasks: taskData.data.listTodos.items
+  computed: {
+    taskList() {
+      return this.$store.state.tasks.items
     }
   },
   created() {
+    this.$store.dispatch('tasks/getTaskItem')
     this.subscribe()
   },
   methods: {
@@ -58,23 +57,17 @@ export default {
     subscribe() {
       API.graphql(graphqlOperation(onCreateTodo)).subscribe({
         next: (eventData) => {
-          this.tasks.push(eventData.value.data.onCreateTodo)
+          this.$store.dispatch('tasks/addTask', eventData.value.data.onCreateTodo)
         }
       })
       API.graphql(graphqlOperation(onUpdateTodo)).subscribe({
         next: (eventData) => {
-          const updatedTask = eventData.value.data.onUpdateTodo
-          this.tasks.some((value, idx) => {
-            if (value.id === updatedTask.id) Object.assign(this.tasks[idx], updatedTask)
-          })
+          this.$store.dispatch('tasks/updateTask', eventData.value.data.onUpdateTodo)
         }
       })
       API.graphql(graphqlOperation(onDeleteTodo)).subscribe({
         next: (eventData) => {
-          const deletedTask = eventData.value.data.onDeleteTodo
-          this.tasks.some((value, idx) => {
-            if (value.id === deletedTask.id) this.tasks.splice(idx, 1)
-          })
+          this.$store.dispatch('tasks/removeTask', eventData.value.data.onDeleteTodo.id)
         }
       })
     },
