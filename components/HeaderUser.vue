@@ -19,13 +19,22 @@
         </v-btn>
       </template>
       <v-list>
-        <v-list-item>
-          <amplify-sign-out />
+        <v-list-item class="user-menu-item">
+          <amplify-sign-out class="signout-button" />
         </v-list-item>
       </v-list>
     </v-menu>
   </v-layout>
 </template>
+
+<style>
+  .user-menu-item {
+    justify-content: center;
+  }
+  .signout-button * {
+    margin: 0;
+  }
+</style>
 
 <script>
 import { Auth } from 'aws-amplify'

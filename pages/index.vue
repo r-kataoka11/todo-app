@@ -1,33 +1,30 @@
 <template>
-  <v-layout
-    column
-    justify-center
-    align-center
-  >
-    <v-flex
-      xs12
-      sm8
-      md6
-    >
-      <v-list two-line>
+  <v-row justify="center" no-gutters>
+    <v-col cols="12" sm="8" md="8">
+      <v-list>
         <TaskItem v-for="task in tasks" :key="task.taskid" :task="task" />
       </v-list>
-    </v-flex>
-    <v-btn
-      @click="addTask"
-      class="mx-2"
-      fab
-      dark
-      fixed
-      right
-      bottom
-      color="indigo"
-    >
-      <v-icon dark>
-        playlist_add
-      </v-icon>
-    </v-btn>
-  </v-layout>
+      <v-dialog v-model="addDialog" persistent max-width="600px">
+        <template v-slot:activator="{ on }">
+          <v-btn
+            v-on="on"
+            class="mx-2"
+            fab
+            dark
+            fixed
+            right
+            bottom
+            color="indigo"
+          >
+            <v-icon dark>
+              playlist_add
+            </v-icon>
+          </v-btn>
+        </template>
+        <TaskEditor @updated="closeAddDialog" />
+      </v-dialog>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -35,9 +32,15 @@ import { API, graphqlOperation } from 'aws-amplify'
 import { listTodos } from '@/src/graphql/queries'
 import { createTodo } from '@/src/graphql/mutations'
 import TaskItem from '~/components/TaskItem'
+import TaskEditor from '~/components/TaskEditor'
 export default {
   middleware: 'auth',
-  components: { TaskItem },
+  components: { TaskItem, TaskEditor },
+  data() {
+    return {
+      addDialog: false
+    }
+  },
   async asyncData() {
     const taskData = await API.graphql(graphqlOperation(listTodos))
     return {
@@ -56,6 +59,9 @@ export default {
           updated_at: Math.floor(nowDate.getTime() / 1000)
         }
       }))
+    },
+    closeAddDialog() {
+      this.addDialog = false
     }
   }
 }
