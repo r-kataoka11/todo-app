@@ -35,7 +35,6 @@ import { API, graphqlOperation } from 'aws-amplify'
 import { listTodos } from '@/src/graphql/queries'
 import { createTodo } from '@/src/graphql/mutations'
 import TaskItem from '~/components/TaskItem'
-const crypto = require('crypto')
 export default {
   middleware: 'auth',
   components: { TaskItem },
@@ -50,7 +49,6 @@ export default {
       const nowDate = new Date()
       API.graphql(graphqlOperation(createTodo, {
         input: {
-          taskid: crypto.randomBytes(10).toString('hex'),
           title: 'テスト',
           content: 'テストです',
           is_completed: false,

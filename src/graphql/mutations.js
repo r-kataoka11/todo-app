@@ -7,7 +7,7 @@ export const createTodo = /* GraphQL */ `
     $condition: ModelTodoConditionInput
   ) {
     createTodo(input: $input, condition: $condition) {
-      taskid
+      id
       title
       content
       is_completed
@@ -22,7 +22,7 @@ export const updateTodo = /* GraphQL */ `
     $condition: ModelTodoConditionInput
   ) {
     updateTodo(input: $input, condition: $condition) {
-      taskid
+      id
       title
       content
       is_completed
@@ -37,7 +37,7 @@ export const deleteTodo = /* GraphQL */ `
     $condition: ModelTodoConditionInput
   ) {
     deleteTodo(input: $input, condition: $condition) {
-      taskid
+      id
       title
       content
       is_completed

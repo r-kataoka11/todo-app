@@ -4,7 +4,7 @@
 export const getTodo = /* GraphQL */ `
   query GetTodo($id: ID!) {
     getTodo(id: $id) {
-      taskid
+      id
       title
       content
       is_completed
@@ -21,7 +21,7 @@ export const listTodos = /* GraphQL */ `
   ) {
     listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        taskid
+        id
         title
         content
         is_completed

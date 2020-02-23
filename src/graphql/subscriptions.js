@@ -4,7 +4,7 @@
 export const onCreateTodo = /* GraphQL */ `
   subscription OnCreateTodo {
     onCreateTodo {
-      taskid
+      id
       title
       content
       is_completed
@@ -16,7 +16,7 @@ export const onCreateTodo = /* GraphQL */ `
 export const onUpdateTodo = /* GraphQL */ `
   subscription OnUpdateTodo {
     onUpdateTodo {
-      taskid
+      id
       title
       content
       is_completed
@@ -28,7 +28,7 @@ export const onUpdateTodo = /* GraphQL */ `
 export const onDeleteTodo = /* GraphQL */ `
   subscription OnDeleteTodo {
     onDeleteTodo {
-      taskid
+      id
       title
       content
       is_completed
