@@ -5,10 +5,17 @@
       fixed
       app
     >
-      <v-toolbar-title v-text="title" />
-      <v-spacer />
-      <SearchForm />
-      <HeaderUser />
+      <v-row align="center">
+        <v-col cols="3">
+          <v-toolbar-title v-text="title" />
+        </v-col>
+        <v-col cols="6">
+          <SearchForm />
+        </v-col>
+        <v-col cols="3">
+          <HeaderUser />
+        </v-col>
+      </v-row>
     </v-app-bar>
     <v-content>
       <v-container>

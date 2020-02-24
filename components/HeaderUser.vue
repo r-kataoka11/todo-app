@@ -1,30 +1,24 @@
 <template>
-  <v-layout
-    column
-    justify-center
-    align-end
-  >
-    <v-menu offset-y>
-      <template v-slot:activator="{ on }">
-        <v-btn
-          v-on="on"
-          color="primary"
-          dark
-          text
-        >
-          <v-avatar>
-            <v-icon>account_circle</v-icon>
-          </v-avatar>
-          {{ UserName }}
-        </v-btn>
-      </template>
-      <v-list>
-        <v-list-item class="user-menu-item">
-          <amplify-sign-out class="signout-button" />
-        </v-list-item>
-      </v-list>
-    </v-menu>
-  </v-layout>
+  <v-menu offset-y>
+    <template v-slot:activator="{ on }">
+      <v-btn
+        v-on="on"
+        color="primary"
+        dark
+        text
+      >
+        <v-avatar>
+          <v-icon>account_circle</v-icon>
+        </v-avatar>
+        {{ UserName }}
+      </v-btn>
+    </template>
+    <v-list>
+      <v-list-item class="user-menu-item">
+        <amplify-sign-out class="signout-button" />
+      </v-list-item>
+    </v-list>
+  </v-menu>
 </template>
 
 <style>

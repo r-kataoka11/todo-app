@@ -1,7 +1,22 @@
 <template>
-  <v-input>
-    <v-text-field v-model="searchText" label="検索" single-line />
-  </v-input>
+  <v-layout
+    justify-center
+  >
+    <v-text-field
+      v-model="searchText"
+      label="検索"
+      single-line
+      dense
+      solo
+      solo-flat
+      enclosed="true"
+      is-booted="true"
+      rounded="true"
+      prepend-inner-icon="search"
+      align-end
+      hide-details
+    />
+  </v-layout>
 </template>
 
 <script>
