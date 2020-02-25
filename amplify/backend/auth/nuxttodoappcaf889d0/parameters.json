@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "nuxttodoappda2190bb_identitypool_da2190bb",
+    "identityPoolName": "nuxttodoappcaf889d0_identitypool_caf889d0",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "nuxttoda2190bb",
-    "userPoolName": "nuxttodoappda2190bb_userpool_da2190bb",
+    "resourceNameTruncated": "nuxttocaf889d0",
+    "userPoolName": "nuxttodoappcaf889d0_userpool_caf889d0",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,9 +28,9 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "nuxttoda2190bb_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "nuxttocaf889d0_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "resourceName": "nuxttodoappda2190bb",
+    "resourceName": "nuxttodoappcaf889d0",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [

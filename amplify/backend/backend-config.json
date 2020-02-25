@@ -1,16 +1,14 @@
 {
 	"auth": {
-		"nuxttodoappda2190bb": {
+		"nuxttodoappcaf889d0": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": [],
 			"customAuth": false
 		}
 	},
-	"storage": {},
-	"function": {},
 	"api": {
-		"nuxtTodoAppApi": {
+		"nuxtTodoApp": {
 			"service": "AppSync",
 			"providerPlugin": "awscloudformation",
 			"output": {
@@ -19,11 +17,17 @@
 					"defaultAuthentication": {
 						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
 						"userPoolConfig": {
-							"userPoolId": "authnuxttodoappda2190bb"
+							"userPoolId": "authnuxttodoappcaf889d0"
 						}
 					}
 				}
 			}
+		}
+	},
+	"hosting": {
+		"S3AndCloudFront": {
+			"service": "S3AndCloudFront",
+			"providerPlugin": "awscloudformation"
 		}
 	}
 }

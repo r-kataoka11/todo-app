@@ -1,10 +1,10 @@
 {
-    "AppSyncApiName": "nuxtTodoAppApi",
+    "AppSyncApiName": "nuxtTodoApp",
     "DynamoDBBillingMode": "PAY_PER_REQUEST",
     "DynamoDBEnableServerSideEncryption": "false",
     "AuthCognitoUserPoolId": {
         "Fn::GetAtt": [
-            "authnuxttodoappda2190bb",
+            "authnuxttodoappcaf889d0",
             "Outputs.UserPoolId"
         ]
     }
