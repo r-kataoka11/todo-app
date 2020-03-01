@@ -28,8 +28,6 @@
 </template>
 
 <script>
-import { API, graphqlOperation } from 'aws-amplify'
-import { createTodo } from '@/src/graphql/mutations'
 import TaskItem from '~/components/TaskItem'
 import TaskEditor from '~/components/TaskEditor'
 export default {
@@ -62,7 +60,7 @@ export default {
      * タスクを新規登録する
      */
     createTask(data) {
-      API.graphql(graphqlOperation(createTodo, { input: data }))
+      this.$store.dispatch('tasks/createTask', data)
       this.closeCreateDialog()
     },
     /**

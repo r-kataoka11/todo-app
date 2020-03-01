@@ -1,4 +1,5 @@
 import { API, graphqlOperation } from 'aws-amplify'
+import { createTodo, updateTodo, deleteTodo } from '@/src/graphql/mutations'
 import { onCreateTodo, onUpdateTodo, onDeleteTodo } from '@/src/graphql/subscriptions'
 import { listTodos } from '@/src/graphql/queries'
 
@@ -48,6 +49,27 @@ export const actions = {
   async getTaskItem({ commit }) {
     const taskData = await API.graphql(graphqlOperation(listTodos))
     commit('setItems', taskData.data.listTodos.items)
+  },
+  /**
+   * タスクを追加する
+   * @param {Object} data 作成するタスクデータ
+   */
+  createTask({ commit }, data) {
+    API.graphql(graphqlOperation(createTodo, { input: data }))
+  },
+  /**
+   * タスクを更新する
+   * @param {Object} data 更新するタスクデータ
+   */
+  updateTask({ commit }, data) {
+    API.graphql(graphqlOperation(updateTodo, { input: data }))
+  },
+  /**
+   * タスクを削除する
+   * @param {Object} data 削除するタスクデータ
+   */
+  deleteTask({ commit }, data) {
+    API.graphql(graphqlOperation(deleteTodo, { input: data }))
   },
   /**
    * タスクの状態を監視する

@@ -23,8 +23,6 @@
 </template>
 
 <script>
-import { API, graphqlOperation } from 'aws-amplify'
-import { updateTodo, deleteTodo } from '@/src/graphql/mutations'
 import TaskEditor from '~/components/TaskEditor'
 export default {
   components: { TaskEditor },
@@ -56,7 +54,7 @@ export default {
         is_completed: !this.task.is_completed,
         updated_at: Math.floor(nowDate.getTime() / 1000)
       }
-      API.graphql(graphqlOperation(updateTodo, { input: data }))
+      this.$store.dispatch('tasks/updateTask', data)
     },
     /*
      * ダイアログを閉じる
@@ -68,18 +66,14 @@ export default {
      * タスク内容を更新する
      */
     updateTask(data) {
-      API.graphql(graphqlOperation(updateTodo, { input: data }))
+      this.$store.dispatch('tasks/updateTask', data)
       this.closeDialog()
     },
     /*
      * クリックしたタスクを削除する
      */
     deleteTask() {
-      API.graphql(graphqlOperation(deleteTodo, {
-        input: {
-          id: this.task.id
-        }
-      }))
+      this.$store.dispatch('tasks/deleteTask', { id: this.task.id })
     }
   }
 }
